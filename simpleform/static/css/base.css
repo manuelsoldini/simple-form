@@ -1,0 +1,85 @@
+a:link, a:visited {
+    color: #893434;
+}
+
+.topbar-inner,.topbar .fill {
+    background-color:#222;
+    background-color:#222222;
+    background-repeat:repeat-x;
+    background-image:-khtml-gradient(linear, left top, left bottom, from(#c03), to(#222222));
+    background-image:-moz-linear-gradient(top, #c03, #222222);
+    background-image:-ms-linear-gradient(top, #c03, #222222);
+    background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #c03), color-stop(100%, #222222));
+    background-image:-webkit-linear-gradient(top, #c03, #222222);
+    background-image:-o-linear-gradient(top, #c03, #222222);
+    background-image:linear-gradient(top, #c03, #222222);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c03', endColorstr='#222222', GradientType=0);
+    -webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    box-shadow:0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+
+.topbar div>ul .menu-dropdown,.nav .menu-dropdown,.topbar div>ul .dropdown-menu,.nav .dropdown-menu{background-color:#300;}
+
+.topbar div>ul .menu-dropdown li a:hover,.nav .menu-dropdown li a:hover,.topbar div>ul .dropdown-menu li a:hover,.nav .dropdown-menu li a:hover {
+    background-color:#c03;
+    background-repeat:repeat-x;
+    background-image:-khtml-gradient(linear, left top, left bottom, from(#c03), to(#191919));
+    background-image:-moz-linear-gradient(top, #c03, #191919);
+    background-image:-ms-linear-gradient(top, #c03, #191919);
+    background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #c03), color-stop(100%, #191919));
+    background-image:-webkit-linear-gradient(top, #c03, #191919);
+    background-image:-o-linear-gradient(top, #c03, #191919);
+    background-image:linear-gradient(top, #c03, #191919);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c03', endColorstr='#191919', GradientType=0);color:#ffffff;
+}
+
+.btn {
+    cursor:pointer;
+    display:inline-block;
+    background-color:#e6e6e6;
+    background-repeat:no-repeat;
+    background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(25%, #ffffff), to(#e6e6e6));
+    background-image:-webkit-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+    background-image:-moz-linear-gradient(top, #ffffff, #ffffff 25%, #e6e6e6);
+    background-image:-ms-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+    background-image:-o-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+    background-image:linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+    padding:5px 14px 6px;
+    text-shadow:0 1px 1px rgba(255, 255, 255, 0.75);
+    color:#333;font-size:13px;
+    line-height:normal;
+    border:1px solid #ccc;
+    border-bottom-color:#bbb;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    -webkit-box-shadow:inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow:inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow:inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05);
+    -webkit-transition:0.1s linear all;
+    -moz-transition:0.1s linear all;
+    -ms-transition:0.1s linear all;
+    -o-transition:0.1s linear all;
+    transition:0.1s linear all;
+}
+
+.btn.primary{
+    color:#ffffff;
+    background-color:#a50;
+    background-repeat:repeat-x;
+    background-image:-khtml-gradient(linear, left top, left bottom, from(#ff0000), to(#c40));
+    background-image:-moz-linear-gradient(top, #ff0000, #a50);
+    background-image:-ms-linear-gradient(top, #ff0000, #a50);
+    background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff0000), color-stop(100%, #a50));
+    background-image:-webkit-linear-gradient(top, #ff0000, #a50);
+    background-image:-o-linear-gradient(top, #ff0000, #a50);
+    background-image:linear-gradient(top, #ff0000, #a50);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0000', endColorstr='#a50', GradientType=0);
+    text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);
+    border-color:#a50 #a50 #003f81;
+    border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+

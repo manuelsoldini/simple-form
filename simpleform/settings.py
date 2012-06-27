@@ -1,5 +1,13 @@
 # Django settings for simpleform project.
 
+import os
+
+
+def rel(*args):
+    """ Return a path relative to this file """
+    return os.path.join(os.path.dirname(__file__), *args)
+
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -19,6 +27,19 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+STATIC_ROOT = ''
+
+STATIC_URL = "/static/"
+
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    rel('static'),
+)
+
+ROOT_URLCONF = 'simpleform.urls'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -78,6 +99,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'simpleform.urls'
 
 TEMPLATE_DIRS = (
+    rel('templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -89,9 +111,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'comon',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'common',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

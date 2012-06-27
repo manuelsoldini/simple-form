@@ -6,7 +6,7 @@ class SimpleForm(models.Model):
     last_name = models.CharField(max_length=50)
     mail = models.EmailField()
     phone = models.CharField(max_length=20)
-    linkToLinkedin = models.URLField(none=True)
-    resume = models.FileField(upload_to='resumes', none=True)
+    link_to_linkedin = models.URLField(null=True, blank=True)
+    resume = models.FileField(upload_to='resumes', null=True, blank=True)
     date = models.DateTimeField(auto_now=True)
 

@@ -1,16 +1,22 @@
 from django.conf.urls.defaults import *
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
+
+from common import views as common
+
 
 urlpatterns = patterns('',
     # Example:
     # (r'^simpleform/', include('simpleform.foo.urls')),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # (r'^admin/', include(admin.site.urls)),
+    (r'^$', common.login),
+    (r'^challenge/$', common.challenge),
+    (r'^submit/$', common.submit),
+    (r'^farewell/$', common.farewell),
+    (r'^admin/', include(admin.site.urls)),
+    #(r'^.*/$', common.login),
 )
+
+urlpatterns += staticfiles_urlpatterns()
