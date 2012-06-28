@@ -2,11 +2,13 @@
 {% block content %}
 
 <p> Sometimes we forget our password. Please, find it to unlock the challenge. </p>
-<form action="/challenge/" method="post"> {% csrf_token %}
+<form action="/login/" method="post" class="form-horizontal"> {% csrf_token %}
     <input type="hidden" name="user" value="{{ username }}" />
     <!-- The password is {{ password }} -->
     Password: <input type="text" name="pass" value=""/> <br/>
-    <button name="button" class="btn"> Find your fate </button>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Find your fate!</button>
+    </div>
 </form>
 
 {% endblock %}

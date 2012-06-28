@@ -12,11 +12,13 @@ urlpatterns = patterns('',
     # (r'^simpleform/', include('simpleform.foo.urls')),
 
     (r'^$', common.login),
+    (r'^login/$', common.login),
     (r'^challenge/$', common.challenge),
-    (r'^submit/$', common.submit),
     (r'^farewell/$', common.farewell),
     (r'^admin/', include(admin.site.urls)),
     #(r'^.*/$', common.login),
 )
 
 urlpatterns += staticfiles_urlpatterns()
+
+urlpatterns += patterns((r'^*(/*)*$', common.login))

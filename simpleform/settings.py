@@ -30,7 +30,7 @@ DATABASES = {
 
 STATIC_ROOT = ''
 
-STATIC_URL = "/static/"
+STATIC_URL = "/static"
 
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -113,6 +113,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'common',
     'django.contrib.admin',
+    'django.contrib.staticfiles',
+    'bootstrap',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

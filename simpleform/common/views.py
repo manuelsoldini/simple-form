@@ -6,8 +6,9 @@ from common.models import SimpleForm
 from random import randrange
 
 from django.forms import ModelForm
+from bootstrap.forms import BootstrapMixin
 
-class MyForm(ModelForm):
+class MyForm(BootstrapMixin, ModelForm):
     class Meta:
         model = SimpleForm
 
@@ -16,31 +17,45 @@ def handle_uploaded_file(f):
         for chunk in f.chunks():
             destination.write(chunk)
 
-def login(request):
-    params = {}
-    params['username'] = 'user' + str(randrange(1000, 9999))
-    params['password'] = str(hex(hash(params['username'])))[2:]
-    return render(request, 'login.html', params)
+def auth(request):
+    request.session['is_auth'] = request.POST['pass']
+    request.session['check'] = request.POST['pass']
 
-def challenge(request):
+def is_auth(session):
+    try:
+        return session['is_auth'] == session['check']
+    except:
+        return False
+
+def login(request):
     if request.method == "POST":
         passwd = str(hex(hash(request.POST['user'])))[2:]
         if passwd == request.POST['pass']:
-            return render(request, 'challenge.html', {"form": MyForm().as_table()})
-        else:
-            raise Http404
-    raise Http404
+            auth(request)
+            return redirect('/challenge')
+    else:
+        if is_auth(request.session):
+            redirect('/challenge')
+        params = {}
+        params['username'] = 'user' + str(randrange(1000, 9999))
+        params['password'] = str(hex(hash(params['username'])))[2:]
+        return render(request, 'login.html', params)
+    return Http404
 
-def submit(request):
-    if request.method == "POST":
-        form = MyForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            handle_uploaded_file(request.FILES['resume'])
-            return redirect('/farewell')
-        else:
-            return render(request, 'challenge.html', {"form": form})
-    return redirect('/login')
+def challenge(request):
+    if request.method == "GET":
+        if is_auth(request.session):
+            return render(request, 'challenge.html', {"form": MyForm()})
+    elif request.method == "POST":
+        if is_auth(request.session):
+            form = MyForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                handle_uploaded_file(request.FILES['resume'])
+                return redirect('/farewell')
+            else:
+                return render(request, 'challenge.html', {"form": form})
+    raise Http404
 
 def farewell(request):
     return render(request, 'farewell.html', {})
