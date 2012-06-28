@@ -11,6 +11,11 @@ class MyForm(ModelForm):
     class Meta:
         model = SimpleForm
 
+def handle_uploaded_file(f):
+    with open('some/file/name.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
 def login(request):
     params = {}
     params['username'] = 'user' + str(randrange(1000, 9999))
@@ -28,9 +33,10 @@ def challenge(request):
 
 def submit(request):
     if request.method == "POST":
-        form = MyForm(request.POST)
+        form = MyForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            handle_uploaded_file(request.FILES['resume'])
             return redirect('/farewell')
         else:
             return render(request, 'challenge.html', {"form": form})
@@ -38,3 +44,5 @@ def submit(request):
 
 def farewell(request):
     return render(request, 'farewell.html', {})
+
+
