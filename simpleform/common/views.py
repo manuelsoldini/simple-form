@@ -4,8 +4,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User, Group
 from common.models import SimpleForm
 from random import randrange
-
+from common.sendmail import sendMail
 from django.forms import ModelForm
+import os
+
+def rel(*args):
+    return os.path.join(os.path.dirname(__file__), *args)
 
 class MyForm(ModelForm):
     class Meta:
@@ -67,8 +71,12 @@ def becomeAJedi(request):
                                 {"file_info": "File Size > 2.5Mb, please \
                                                upload a smaller file",
                                  "form": form})    
-                form.save()
-                #send_mail(form)
+                model = form.save()
+                subject = model.first_name + "-" + model.last_name
+                subject += "_Challenge"
+                text = "Test mail"
+                files = rel("..", "media", model.resume.url)
+                sendMail(subject, text, files)
                 return redirect('/farewell')
             else:
                 return render(request, 'becomeAJedi.html', {"form": form})
