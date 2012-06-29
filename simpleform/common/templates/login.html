@@ -5,7 +5,15 @@
 <form action="/login/" method="post" class="form-horizontal"> {% csrf_token %}
     <input type="hidden" name="user" value="{{ username }}" />
     <!-- The password is {{ password }} -->
-    Password: <input type="text" name="pass" value=""/> <br/>
+
+    <div class="clearfix">
+        <label for="id_pass">Password: </label>
+        <div class="input">
+            <input id="id_pass" type="text" name="pass" maxlength="50" value="ChangeIt"/>
+        </div>
+
+    </div>
+    
     <div class="form-actions">
         <button type="submit" class="btn btn-primary">Find your fate!</button>
     </div>

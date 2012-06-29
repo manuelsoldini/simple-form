@@ -6,20 +6,15 @@ from common.models import SimpleForm
 from random import randrange
 
 from django.forms import ModelForm
-from bootstrap.forms import BootstrapMixin
 
-class MyForm(BootstrapMixin, ModelForm):
+class MyForm(ModelForm):
     class Meta:
         model = SimpleForm
-
-def handle_uploaded_file(f):
-    with open('some/file/name.txt', 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
 
 def auth(request):
     request.session['is_auth'] = request.POST['pass']
     request.session['check'] = request.POST['pass']
+    request.session.set_expiry(30*60)
 
 def is_auth(session):
     try:
@@ -32,29 +27,51 @@ def login(request):
         passwd = str(hex(hash(request.POST['user'])))[2:]
         if passwd == request.POST['pass']:
             auth(request)
-            return redirect('/challenge')
+            return redirect('/success')
     else:
         if is_auth(request.session):
-            redirect('/challenge')
+            return redirect('/success')
         params = {}
         params['username'] = 'user' + str(randrange(1000, 9999))
         params['password'] = str(hex(hash(params['username'])))[2:]
         return render(request, 'login.html', params)
     return Http404
 
-def challenge(request):
+def success(request):
+    if request.method == "POST":
+        if is_auth(request.session):
+            return redirect('/fake')
+    else:
+        if is_auth(request.session):
+            return render(request, 'success.html', {})
+        return redirect('/login')
+    return Http404
+
+def fake(request):
+    if is_auth(request.session):
+        return render(request, "fakeException.html", {})
+    return redirect('/login')
+
+def becomeAJedi(request):
     if request.method == "GET":
         if is_auth(request.session):
-            return render(request, 'challenge.html', {"form": MyForm()})
+            return render(request, 'becomeAJedi.html', {"form": MyForm()})
     elif request.method == "POST":
         if is_auth(request.session):
             form = MyForm(request.POST, request.FILES)
             if form.is_valid():
+                f = request.FILES.get('resume', None)
+                if f:
+                    if f.size/1024.0/1024 > 2.5:
+                        return render(request, "becomeAJedi.html", 
+                                {"file_info": "File Size > 2.5Mb, please \
+                                               upload a smaller file",
+                                 "form": form})    
                 form.save()
-                handle_uploaded_file(request.FILES['resume'])
+                #send_mail(form)
                 return redirect('/farewell')
             else:
-                return render(request, 'challenge.html', {"form": form})
+                return render(request, 'becomeAJedi.html', {"form": form})
     raise Http404
 
 def farewell(request):

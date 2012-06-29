@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
+{% load bootstrap %}
 
 <div align="centre center">
     <h1> Congrats </h1>
     <p> We want people like you </p>
-    <form action="/challenge/" method="post" class="form-horizontal"> {% csrf_token %}
-        {{ form }}
+    {% if file_info %}
+        <h2>{{ file_info }}</h2>
+    {% endif %}
+    <form action="/becomeAJedi/" method="post" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
+        {{ form|bootstrap }}
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>

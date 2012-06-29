@@ -115,6 +115,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.staticfiles',
     'bootstrap',
+    'bootstrapform',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
