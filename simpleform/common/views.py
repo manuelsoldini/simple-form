@@ -34,10 +34,14 @@ def is_auth(session):
 
 def login(request):
     if request.method == "POST":
-        passwd = str(hex(hash(request.POST['user'])))[2:]
-        if passwd == request.POST['pass']:
-            auth(request)
-            return redirect('/success')
+        try:
+            passwd = str(hex(hash(request.POST['user'])))[2:]
+            if passwd == request.POST['pass']:
+                auth(request)
+                return redirect('/success')
+        except:
+            pass
+        raise Http404
     else:
         if is_auth(request.session):
             return redirect('/success')
