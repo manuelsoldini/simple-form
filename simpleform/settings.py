@@ -8,7 +8,7 @@ def rel(*args):
     return os.path.join(os.path.dirname(__file__), *args)
 
 
-DEBUG = True
+DEBUG = False #True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

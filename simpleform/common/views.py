@@ -20,6 +20,12 @@ def auth(request):
     request.session['check'] = request.POST['pass']
     request.session.set_expiry(30*60)
 
+def deauth(request):
+    try:
+        request.session['is_auth'] = None
+    except:
+        pass
+
 def is_auth(session):
     try:
         return session['is_auth'] == session['check']
@@ -74,15 +80,25 @@ def becomeAJedi(request):
                 model = form.save()
                 subject = model.first_name + "-" + model.last_name
                 subject += "_Challenge"
-                text = "Test mail"
-                files = rel("..", "media", model.resume.url)
-                sendMail(subject, text, files)
+                text = "Test mail\n\nTel: " + model.phone
+	        text += "\nMail: " + model.mail 
+                try:
+                    text += "\nLinkedin: " + model.link_to_linkedin
+                except:
+                    pass
+                text += "\n\n Test mail"
+                try:
+		    files = rel("..", "media", model.resume.url)
+                    sendMail(subject, text, files)
+                except:
+                    sendMail(subject, text)
                 return redirect('/farewell')
             else:
                 return render(request, 'becomeAJedi.html', {"form": form})
     raise Http404
 
 def farewell(request):
+    deauth(request)
     return render(request, 'farewell.html', {})
 
 

@@ -9,12 +9,12 @@ from email.MIMEImage import MIMEImage
 from email.Encoders import encode_base64
 
 USER = "i.am.sr.smith"
-PASS = "159632qwe"
+PASS = "test"
 
 def sendMail(subject, text, *attachmentFilePaths):
     gmailUser = USER + '@gmail.com'
     gmailPassword = PASS
-    recipient = 'barto677@gmail.com'
+    recipient = 'manuel.soldini@teracode.com'
     msg = MIMEMultipart()
     msg['From'] = gmailUser
     msg['To'] = recipient
