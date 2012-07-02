@@ -2,6 +2,7 @@
 {% block content %}
 
 <h2> You are doing just right, don't give up! </h2>
+<h3> The session will expire in 15 minutes </h3>
 <form action="/success/" method="post" class="form-horizontal"> {% csrf_token %}
     <div class="form-actions">
         <button type="submit" class="btn btn-primary">Continue!</button>

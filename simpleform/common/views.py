@@ -18,7 +18,7 @@ class MyForm(ModelForm):
 def auth(request):
     request.session['is_auth'] = request.POST['pass']
     request.session['check'] = request.POST['pass']
-    request.session.set_expiry(30*60)
+    request.session.set_expiry(15*60)
 
 def deauth(request):
     try:
@@ -46,22 +46,28 @@ def login(request):
         if is_auth(request.session):
             return redirect('/success')
         params = {}
-        params['username'] = 'user' + str(randrange(1000, 9999))
-        params['password'] = str(hex(hash(params['username'])))[2:]
+        try:
+            params['username'] = request.session['username']
+            params['password'] = request.session['password']
+        except:
+            params['username'] = 'user' + str(randrange(1000, 9999))
+            params['password'] = str(hex(hash(params['username'])))[2:]
+            request.session['username'] = params['username']
+            request.session['password'] = params['password']
         return render(request, 'login.html', params)
     return Http404
 
 def success(request):
     if request.method == "POST":
         if is_auth(request.session):
-            return redirect('/fake')
+            return redirect('/fakeError/success.html')
     else:
         if is_auth(request.session):
             return render(request, 'success.html', {})
         return redirect('/login')
     return Http404
 
-def fake(request):
+def fakeError(request):
     if is_auth(request.session):
         return render(request, "fakeException.html", {})
     return redirect('/login')

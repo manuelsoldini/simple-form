@@ -3,14 +3,16 @@
   <head>
     <meta charset="utf-8"/>
     <title>Ultimate Challenge</title>
+
     <link rel="stylesheet"
         href="{{ STATIC_URL }}/css/base.css">
     <link rel="stylesheet"
         href="{{ STATIC_URL }}/css/bootstrap.min.css">
+    
     {% block extrastyle %}{% endblock %}
     {% block extrahead %}{% endblock %}
   </head>
-  <body>
+  <body bgcolor=="#000000">
     <div class="container" align="center">
       {% block content %}
       

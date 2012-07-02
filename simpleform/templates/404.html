@@ -1,6 +1,15 @@
 {% extends "base.html" %}
+
+    {% block extrastyle %}
+
+        <link rel="stylesheet"
+            href="{{ STATIC_URL }}/css/override.css">
+    
+    {% endblock %}
+
 {% block content %}
 
-<p> You didn't say the magic word </p>
-<img src="{{ STATIC_URL }}/udidnt.gif" alt="Peter" />
+    <h1 class="small"> You didn't say the magic word </h1>
+    <img src="{{ STATIC_URL }}/udidnt.gif" alt="Peter" />
+
 {% endblock %}

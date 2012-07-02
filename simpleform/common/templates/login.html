@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<p> Sometimes we forget our password. Please, find it to unlock the challenge. </p>
+<h2> Sometimes we forget our password. Please, find it to unlock the challenge. </h2>
 <form action="/login/" method="post" class="form-horizontal"> {% csrf_token %}
     <input type="hidden" name="user" value="{{ username }}" />
     <!-- The password is {{ password }} -->
