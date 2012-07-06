@@ -1,3 +1,5 @@
+DEBUG = False
+#DEBUG = True
 # Django settings for simpleform project.
 
 import os
@@ -8,7 +10,6 @@ def rel(*args):
     return os.path.join(os.path.dirname(__file__), *args)
 
 
-DEBUG = False #True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

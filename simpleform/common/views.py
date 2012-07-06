@@ -15,6 +15,9 @@ class MyForm(ModelForm):
     class Meta:
         model = SimpleForm
 
+def myhash(user):
+    return str(hex(hash(user))).split('x')[1][2:]
+
 def auth(request):
     request.session['is_auth'] = request.POST['pass']
     request.session['check'] = request.POST['pass']
@@ -23,6 +26,7 @@ def auth(request):
 def deauth(request):
     try:
         request.session['is_auth'] = None
+        del(request.session['password'])
     except:
         pass
 
@@ -35,7 +39,7 @@ def is_auth(session):
 def login(request):
     if request.method == "POST":
         try:
-            passwd = str(hex(hash(request.POST['user'])))[2:]
+            passwd = myhash(request.POST['user'])
             if passwd == request.POST['pass']:
                 auth(request)
                 return redirect('/success')
@@ -51,7 +55,7 @@ def login(request):
             params['password'] = request.session['password']
         except:
             params['username'] = 'user' + str(randrange(1000, 9999))
-            params['password'] = str(hex(hash(params['username'])))[2:]
+            params['password'] = myhash(params['username'])
             request.session['username'] = params['username']
             request.session['password'] = params['password']
         return render(request, 'login.html', params)
@@ -108,7 +112,11 @@ def becomeAJedi(request):
     raise Http404
 
 def farewell(request):
-    deauth(request)
-    return render(request, 'farewell.html', {})
+    if request.method != "GET":
+	raise Http404
+    if is_auth(request.session):
+        deauth(request)
+        return render(request, 'farewell.html', {})
+    raise Http404
 
 

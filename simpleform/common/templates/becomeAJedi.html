@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% block content %}
+{% block no_div %}
 {% load bootstrap %}
 
-<div align="centre center">
+<div align="center" style="margin-top:5%;zoom:1.2;">
     <h1> Congrats </h1>
-    <p> We want people like you </p>
+    <h3> We want people like you </h3>
     {% if file_info %}
         <h2>{{ file_info }}</h2>
     {% endif %}

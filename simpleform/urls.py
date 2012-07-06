@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     (r'^becomeAJedi$', common.becomeAJedi),
     (r'^becomeAJedi/$', common.becomeAJedi),
     (r'^farewell/$', common.farewell),
+    (r'^farewell$', common.farewell),
     (r'^admin/', include(admin.site.urls)),
     #(r'^.*/$', common.login),
 )
