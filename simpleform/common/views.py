@@ -16,7 +16,7 @@ class MyForm(ModelForm):
         model = SimpleForm
 
 def myhash(user):
-    return str(hex(hash(user))).split('x')[1][2:]
+    return str(hex(hash(user))).split('x')[1]
 
 def auth(request):
     request.session['is_auth'] = request.POST['pass']
@@ -58,6 +58,7 @@ def login(request):
             params['password'] = myhash(params['username'])
             request.session['username'] = params['username']
             request.session['password'] = params['password']
+            request.session.set_expiry(5*60)
         return render(request, 'login.html', params)
     return Http404
 

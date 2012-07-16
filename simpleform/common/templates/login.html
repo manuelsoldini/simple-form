@@ -7,16 +7,22 @@
     <form action="/login/" method="post" class="form-horizontal"> {% csrf_token %}
 
         <input type="hidden" name="user" value="{{ username }}" />
-        <!-- The password is {{ password }} -->
+
         </br>
 
-        <div class="control-group">
+        <div class="control-group" id="PASS_FIELD">
+
             <label class="control-label" for="id_pass" align="center">
                 Password: 
             </label>
 
+            <div style="display:none;">
+		The password is {{ password }}
+            </div>
+
             <div class="controls">
                 <input id="id_pass" type="text" name="pass" maxlength="50" value="ChangeIt"/>
+                 <!-- The password is {{ password }} -->
             </div>
 
         </div>
